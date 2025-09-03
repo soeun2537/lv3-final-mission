@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/meetingroom?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
+    url: jdbc:mysql://${DB_ENDPOINT}:3306/${DB_NAME}?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     show-sql: true
     properties:
@@ -26,9 +26,9 @@ springdoc:
 security:
   jwt:
     token:
-      secret-key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ih1aovtQShabQ7l0cINw4k1fagApg3qLWiB8Kt59Lno
+      secret-key: ${JWT_SECRET}
       valid-seconds: 3600000
 
 random:
   name:
-    secret-key: 36615ccb4b0246b9bda9bfae7346f9af
+    secret-key: ${RANDOM_SECRET}
