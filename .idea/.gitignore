@@ -1,35 +1,59 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Environment-dependent path to Maven home directory
-/mavenHomeManager.xml
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
-
-# Gradle
-.gradle/
-build/
-
-# IDE
+# =========================
+# IntelliJ / JetBrains IDE
+# =========================
 .idea/
 *.iml
 *.ipr
 *.iws
+shelf/
+workspace.xml
+
+# VSCode
 .vscode/
 
-# OS
-.DS_Store
+# =========================
+# Gradle
+# =========================
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
+# =========================
 # Logs
+# =========================
 *.log
 
+# =========================
+# OS / System Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
 # JAR/WAR/EAR
+# =========================
 *.jar
 *.war
 *.ear
 
-# Spring specific
+# =========================
+# Spring Specific
+# =========================
 out/
+
+# =========================
+# HTTP Client Requests
+# =========================
+httpRequests/
+
+# =========================
+# Data Sources (IntelliJ)
+# =========================
+dataSources/
+dataSources.local.xml
+
+# =========================
+# Maven (if any legacy usage)
+# =========================
+mavenHomeManager.xml
