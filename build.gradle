@@ -29,13 +29,14 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-gson:0.11.2'
 
-    // MySQL
-    implementation 'mysql:mysql-connector-java:8.0.32'
 
-    // h2
+    // MySQL Driver (RDS용)
+    runtimeOnly 'com.mysql:mysql-connector-j:9.0.0'
+
+    // H2 (local/test)
     runtimeOnly 'com.h2database:h2'
 
-    // Swagger
+    // Swagger / OpenAPI
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5'
 
     // lombok

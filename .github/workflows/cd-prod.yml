@@ -1,14 +1,14 @@
-name: CD Dev
+name: CD Prod
 
 on:
   push:
     branches:
-      - dev
+      - prod
   workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, dev]
+    runs-on: [self-hosted, prod]
     env:
       JAR_NAME: lv3-final-mission-0.0.1-SNAPSHOT.jar
       APP_PORT: 8080
@@ -22,7 +22,7 @@ jobs:
       - name: Add PROD_SECRET_YML
         run: |
           mkdir -p $RESOURCES_DIR
-          echo "${{ secrets.APPLICATION_DEV_YML }}" > $RESOURCES_DIR/$SECRET_FILE
+          echo "${{ secrets.APPLICATION_PROD_YML }}" > $RESOURCES_DIR/$SECRET_FILE
 
       - name: Build with Gradle
         run: ./gradlew clean build
