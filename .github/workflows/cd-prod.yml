@@ -1,0 +1,48 @@
+name: CD Prod
+
+on:
+  push:
+    branches:
+      - prod
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, prod]
+    env:
+      JAR_NAME: lv3-final-mission-0.0.1-SNAPSHOT.jar
+      APP_PORT: 8080
+      RESOURCES_DIR: src/main/resources
+      SECRET_FILE: application-secret.yml
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Add PROD_SECRET_YML
+        run: |
+          mkdir -p $RESOURCES_DIR
+          echo "${{ secrets.APPLICATION_PROD_YML }}" > $RESOURCES_DIR/$SECRET_FILE
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      - name: Stop existing application
+        run: |
+          if sudo lsof -i:$APP_PORT -t >/dev/null; then
+            echo "Stopping application running on port $APP_PORT"
+            sudo lsof -i:$APP_PORT -t | sudo xargs kill -9
+          else
+            echo "No application running on port $APP_PORT"
+          fi
+
+      - name: Start application
+        run: |
+          sudo nohup java -jar build/libs/$JAR_NAME > app.log 2>&1 &
+          sleep 30
+          if ! sudo lsof -i:$APP_PORT -t >/dev/null; then
+            echo "Application failed to start on port $APP_PORT"
+            exit 1
+          else
+            echo "Application is running on port $APP_PORT"
+          fi
